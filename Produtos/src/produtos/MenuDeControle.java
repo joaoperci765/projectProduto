@@ -1,15 +1,17 @@
 package produtos;
-import java.util.ArrayList;   
+import java.util.ArrayList;    
 import java.util.List;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 public class MenuDeControle {
 	static Produtos produtos = new Produtos();
 	static List<String> listaDeProdutos =  new ArrayList<String>();
 	static Float valorTotal;
 	static Scanner teclado = new Scanner(System.in);
 	static Integer valorMenu = 0;
-	
+	static String valorProdutoString;
+	static String qtdProdutoString;
+	static String valorTotalString;
+
 	public static void chamarMenu() {
 	    System.out.println("#######################################\n#######################################"
 				+"\n#######################################");
@@ -22,6 +24,7 @@ public class MenuDeControle {
     	System.err.println("############################\n############################\n");
     	
     	valorMenu = teclado.nextInt();
+    	
 	}
 	
 	public static void main(String[] args) {
@@ -29,33 +32,38 @@ public class MenuDeControle {
     	while (valorMenu !=3) {
     		    chamarMenu();
     		if (valorMenu == 1 ) {
-    			inserirProdutos();
+    			inserirProdutos(listaDeProdutos);
     			chamarMenu();
     		}else if(valorMenu ==2) {
-    		   imprimirProdutos(listaDeProdutos);
-    		   chamarMenu();
+    			imprimirProdutos(listaDeProdutos);
+    		    chamarMenu();
     		}else if (valorMenu ==3) {
     		   System.exit(0);
-    		   chamarMenu();
+    		    chamarMenu();
     		}
     	}
-    	
-    
-    	}
-    private static void inserirProdutos(){
-    
-    	System.out.println("Informe o nome do Produto");
-    	String nomeProduto = teclado.next();
-    	System.out.println("Informe a quantidade do Produto");
-    	Float qtdProduto = teclado.nextFloat();
-    	System.out.println("Informe o valor do Produto");
-    	Float valorProduto = teclado.nextFloat();
-    	valorTotal = qtdProduto*valorProduto;
  
+   	}
+    private static void inserirProdutos(List<String> listaDeProdutos){
+    	
+    	System.out.println("Informe o nome do Produto\n");
+    	String nomeProduto = teclado.next();
+    	System.out.println("Informe a quantidade do Produto\n");
+    	Float qtdProdutoFinal = teclado.nextFloat();
+    	System.out.println("Informe o valor do Produto\n");
+    	Float valorProdutoFinal = teclado.nextFloat();
+    	//Validando o tipo pra String p/ adicionar a lista
+    	valorProdutoString = Float.toString(valorProdutoFinal);
+    	qtdProdutoString = Float.toString(qtdProdutoFinal);
+    	valorTotal = qtdProdutoFinal*valorProdutoFinal;
+    	
+    	listaDeProdutos.add(nomeProduto);
+    	listaDeProdutos.add(valorProdutoString);
+    	listaDeProdutos.add(qtdProdutoString);
+    	
     }
-    private static void imprimirProdutos(List<String> listaDeProdutos) {
-		JOptionPane.showInputDialog(valorTotal);
-		
-	}
+    private static void imprimirProdutos(List<String> listaDeProdutos){
+    	System.err.println("["+listaDeProdutos+valorTotal+"Valor Total="+valorTotal+"]");
+    }
 }	
   
